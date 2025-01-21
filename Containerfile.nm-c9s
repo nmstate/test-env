@@ -8,6 +8,8 @@ RUN dnf install epel-release -y && \
         dnsmasq wget lighttpd tcpdump iproute procps-ng nispor -y && \
     dnf clean all
 
+RUN find /etc/NetworkManager/system-connections/ -type f -exec rm {} \;
+
 RUN systemctl enable systemd-udevd && systemctl disable NetworkManager
 
 CMD ["/usr/sbin/init"]
