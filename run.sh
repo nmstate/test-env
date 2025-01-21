@@ -1,7 +1,12 @@
 #!/bin/bash
 
-IMAGE="quay.io/cathay4t/nm-c9s"
-NAME="nm-c9s"
+IMAGE="quay.io/cathay4t/nm-c10s"
+NAME="nm-c10s"
+
+if [ "CHK$1" == "CHKc9s" ];then
+    IMAGE="quay.io/cathay4t/nm-c9s"
+    NAME="nm-c9s"
+fi
 
 CONTAINER_ID=`
     sudo podman run --systemd=true --privileged -d \

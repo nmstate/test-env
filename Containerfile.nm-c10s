@@ -1,14 +1,14 @@
-FROM quay.io/centos/centos:stream9
+FROM quay.io/centos/centos:stream10
 
 RUN dnf install epel-release -y && \
     dnf install \
         systemd systemd-udev NetworkManager nftables openvpn vim net-tools \
         NetworkManager-openvpn wireguard-tools \
         libreswan NetworkManager-libreswan \
-        dnsmasq wget lighttpd tcpdump iproute procps-ng nispor -y && \
+        dnsmasq wget lighttpd tcpdump iproute procps-ng -y && \
     dnf clean all
 
-RUN find /etc/NetworkManager/system-connections/ -type f -exec rm -v {} \;
+RUN find /etc/NetworkManager/system-connections/ -type f -exec rm {} \;
 
 RUN systemctl enable systemd-udevd && systemctl disable NetworkManager
 
