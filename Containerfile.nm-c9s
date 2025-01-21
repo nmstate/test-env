@@ -4,7 +4,7 @@ RUN dnf install epel-release -y && \
     dnf install \
         systemd systemd-udev NetworkManager nftables openvpn vim net-tools \
         NetworkManager-openvpn wireguard-tools \
-        libreswan NetworkManager-libreswan \
+        libreswan NetworkManager-libreswan git \
         dnsmasq wget lighttpd tcpdump iproute procps-ng nispor -y && \
     dnf clean all
 
