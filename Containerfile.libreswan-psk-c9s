@@ -2,7 +2,7 @@ FROM quay.io/centos/centos:stream9
 
 RUN dnf install epel-release -y && \
     dnf install systemd systemd-udev vim net-tools \
-        tcpdump iproute procps-ng nispor libreswan -y && \
+        tcpdump iproute procps-ng nispor libreswan iputils -y && \
     dnf clean all
 
 COPY ipsec/psk.secrets /etc/ipsec.d/psk.secrets
