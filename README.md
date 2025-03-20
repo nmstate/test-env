@@ -1,21 +1,21 @@
-# Containers for personal use
+# Containers for test usage
 
-## Containerfile.nm-c10s
+The containers are stored in (https://quay.io/repository/cathay4t/test-env)
 
-CentOS Stream 10 with NetworkManager
-
-quay.io/cathay4t/nm-c10s
+## NetworkManager on CentOS Stream 10
 
 ```bash
-./run.sh
+./run.sh nm c10s
 ```
 
-## Containerfile.nm-c9s
-
-CentOS Stream 9 with NetworkManager
-
-quay.io/cathay4t/nm-c9s
+## NetworkManager on CentOS Stream 9
 
 ```bash
-./run.sh c9s
+./run.sh nm c9s
+```
+
+## IPSec server with PSK authentication on CentOS Stream 9
+
+```bash
+./run.sh ipsec psk
 ```

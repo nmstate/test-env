@@ -1,0 +1,13 @@
+FROM quay.io/centos/centos:stream9
+
+RUN dnf install epel-release -y && \
+    dnf install systemd systemd-udev vim net-tools \
+        tcpdump iproute procps-ng nispor libreswan -y && \
+    dnf clean all
+
+COPY ipsec/psk.secrets /etc/ipsec.d/psk.secrets
+COPY ipsec/psk.conf /etc/ipsec.d/psk.conf
+
+RUN systemctl enable systemd-udevd && systemctl enable ipsec.service
+
+CMD ["/usr/sbin/init"]
