@@ -9,7 +9,7 @@ SRV_CORP_IPV6_ADDR="fd00:a::1"
 CORP_IPV4_SUBNET="10.0.0.0/24"
 CORP_IPV6_SUBNET="fd00:a::/64"
 
-PSK_IMAGE="quay.io/cathay4t/test-env:librswan-c9s-psk"
+PSK_IMAGE="quay.io/cathay4t/test-env:libreswan-psk-c9s"
 
 function clean_up {
     podman network rm gw -f
@@ -40,6 +40,7 @@ function setup_podman_network {
 }
 
 function start_psk {
+    podman pull $PSK_IMAGE
     CONTAINER_ID=$(podman run -d --privileged \
         --name ipsec-srv-psk --hostname hostb.example.org \
         --network corp:ip=$SRV_CORP_IPV4_ADDR,ip6=$SRV_CORP_IPV6_ADDR \
@@ -61,6 +62,9 @@ To start the ipsec connection, please invoke
 
     nmstatectl apply -f ./ipsec/psk.yml
 
+To test the ipsec connection, try
+
+    ping $SRV_CORP_IPV4_ADDR
 "
 
 read -n 1 -p "Press anykey to delete this container and clean up"
