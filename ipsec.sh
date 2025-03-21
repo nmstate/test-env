@@ -17,6 +17,14 @@ CLI_CONTAINER_NAME="ipsec-cli"
 PSK_IMAGE="quay.io/cathay4t/test-env:libreswan-psk-c9s"
 CLI_IMAGE="quay.io/cathay4t/test-env:libreswan-cli-c9s"
 
+function pull_container_image {
+    local container_id=$1
+
+    for i in {1..5};do
+        podman pull $container_id && break
+    done
+}
+
 function clean_up {
     podman rm -f $CLI_CONTAINER_NAME 1>/dev/null 2>/dev/null || true
     podman rm -f $SRV_CONTAINER_NAME 1>/dev/null 2>/dev/null || true
@@ -59,6 +67,8 @@ function wait_services {
 }
 
 function start_psk_srv {
+    pull_container_image $PSK_IMAGE
+
     podman run -d --privileged --replace \
         --name $SRV_CONTAINER_NAME --hostname hostb.example.org \
         --network ns:/run/netns/$SRV_NET_NS_NAME \
@@ -68,6 +78,8 @@ function start_psk_srv {
 }
 
 function start_cli {
+    pull_container_image $CLI_IMAGE
+
     podman run -d --privileged --replace \
         --name $CLI_CONTAINER_NAME --hostname hosta.example.org \
         --network ns:/run/netns/$CLI_NET_NS_NAME \
