@@ -5,7 +5,7 @@ RUN dnf install epel-release -y && \
         systemd systemd-udev NetworkManager nftables openvpn vim net-tools \
         NetworkManager-openvpn wireguard-tools \
         libreswan NetworkManager-libreswan git \
-        dnsmasq wget lighttpd tcpdump iproute procps-ng nispor -y && \
+        dnsmasq wget lighttpd tcpdump iproute procps-ng nispor nmstate -y && \
     dnf clean all
 
 RUN find /etc/NetworkManager/system-connections/ -type f -exec rm -v {} \;

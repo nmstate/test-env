@@ -2,12 +2,16 @@ FROM quay.io/centos/centos:stream9
 
 RUN dnf install epel-release -y && \
     dnf install systemd systemd-udev vim net-tools \
-        tcpdump iproute procps-ng nispor libreswan iputils -y && \
+        tcpdump iproute procps-ng nispor libreswan iputils \
+        nmstate NetworkManager -y && \
     dnf clean all
 
 COPY ipsec/psk.secrets /etc/ipsec.d/psk.secrets
 COPY ipsec/psk.conf /etc/ipsec.d/psk.conf
+COPY ipsec/ipsec_srv_network.yml /etc/nmstate/ipsec_srv_network.yml
 
-RUN systemctl enable systemd-udevd && systemctl enable ipsec.service
+RUN systemctl enable systemd-udevd && \
+    systemctl enable NetworkManager.service && \
+    systemctl enable nmstate.service
 
 CMD ["/usr/sbin/init"]

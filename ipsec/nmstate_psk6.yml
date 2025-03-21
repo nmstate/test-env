@@ -1,17 +1,5 @@
 ---
 interfaces:
-  - name: mac0
-    type: mac-vlan
-    mac-vlan:
-      base-iface: br0
-      mode: passthru
-      promiscuous: true
-    ipv4:
-      enabled: true
-      dhcp: false
-      address:
-        - ip: 192.0.2.2
-          prefix-length: 24
   - name: hosta_conn
     type: ipsec
     ipv4:
@@ -19,11 +7,11 @@ interfaces:
       dhcp: true
     libreswan:
       ipsec-interface: "99"
-      left: 192.0.2.2
+      left: 2001:db8:a::2
       leftid: 'hosta-psk.example.org'
-      right: 192.0.2.1
+      right: 2001:db8:a::1
       rightid: 'hostb-psk.example.org'
-      rightsubnet: 0.0.0.0/0
+      rightsubnet: fd00:a::/64
       psk: "JjyNzrnHTnMqzloKaMuq2uCfJvSSUqTYdAXqD2U2OCFyVIJUUEHmXihBbPrUcmik"
       leftmodecfgclient: true
       ikev2: insist

@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 IPSEC_SRV_IPV4_SUBNET="192.0.2.0/24"
 IPSEC_SRV_IPV6_SUBNET="2001:db8:a::/64"
@@ -9,48 +9,70 @@ SRV_CORP_IPV6_ADDR="fd00:a::1"
 #CORP_IPV4_SUBNET="10.0.0.0/24"
 #CORP_IPV6_SUBNET="fd00:a::/64"
 
+SRV_NET_NS_NAME="ipsec-srv"
+CLI_NET_NS_NAME="ipsec-cli"
+SRV_CONTAINER_NAME="ipsec-srv"
+CLI_CONTAINER_NAME="ipsec-cli"
+
 PSK_IMAGE="quay.io/cathay4t/test-env:libreswan-psk-c9s"
+CLI_IMAGE="quay.io/cathay4t/test-env:libreswan-cli-c9s"
 
 function clean_up {
-    podman network rm br0 -f
-    nmcli c del br0 || true
-    ip link del br0 || true
+    podman rm -f $CLI_CONTAINER_NAME 1>/dev/null 2>/dev/null || true
+    podman rm -f $SRV_CONTAINER_NAME 1>/dev/null 2>/dev/null || true
+    ip netns exec $CLI_NET_NS_NAME ip link del ipsec_cli 2>/dev/null || true
+    ip netns del $SRV_NET_NS_NAME 2>/dev/null || true
+    ip netns del $CLI_NET_NS_NAME 2>/dev/null || true
 }
 
+trap clean_up EXIT
 
 function setup_podman_network {
     clean_up
 
-    sleep 1
+    ip netns add $SRV_NET_NS_NAME
+    ip netns add $CLI_NET_NS_NAME
+    ip link add ipsec_cli type veth peer ipsec_srv
+    ip link set ipsec_srv netns $SRV_NET_NS_NAME
+    ip link set ipsec_cli netns $CLI_NET_NS_NAME
+    ip netns exec $SRV_NET_NS_NAME ip link set ipsec_srv up
+    ip netns exec $CLI_NET_NS_NAME ip link set ipsec_cli up
+}
 
-    echo "
-    interfaces:
-      - name: br0
-        type: linux-bridge
-        bridge:
-          options:
-            stp:
-              enabled: false
-    " | nmstatectl apply -
+function wait_services {
+    local container_id=$1
 
+    podman exec -i $container_id /bin/bash -c  \
+        'systemctl start NetworkManager.service;
+         while ! systemctl is-active NetworkManager.service; do sleep 1; done'
+    podman exec -i $container_id /bin/bash -c  \
+         'systemctl start nmstate.service;
+          while ! systemctl is-active nmstate.service; do sleep 1; done'
 
-    podman network create br0 \
-        --driver bridge --opt "mode=unmanaged" --interface-name br0 --internal \
-        --disable-dns \
-        --subnet $IPSEC_SRV_IPV4_SUBNET --subnet $IPSEC_SRV_IPV6_SUBNET
+    # Need to wait 2 seconds for IPv6 duplicate address detection
+    sleep 2
+
+    podman exec -i $container_id /bin/bash -c  \
+         'systemctl start ipsec.service;
+          while ! systemctl is-active ipsec.service; do sleep 1; done'
 
 }
 
-function start_psk {
-    podman pull $PSK_IMAGE
-    CONTAINER_ID=$(podman run -d --privileged \
-        --name ipsec-srv-psk --hostname hostb.example.org \
-        --network br0:ip=$SEV_IPSEC_IPV4_ADDR,ip6=$SRV_IPSEC_IPV6_ADDR \
-        $PSK_IMAGE)
-    podman exec $CONTAINER_ID ip link add corp0 type dummy
-    podman exec $CONTAINER_ID ip link set corp0 up
-    podman exec $CONTAINER_ID ip addr add ${SRV_CORP_IPV4_ADDR}/24 dev corp0
-    podman exec $CONTAINER_ID ip addr add ${SRV_CORP_IPV6_ADDR}/64 dev corp0
+function start_psk_srv {
+    podman run -d --privileged --replace \
+        --name $SRV_CONTAINER_NAME --hostname hostb.example.org \
+        --network ns:/run/netns/$SRV_NET_NS_NAME \
+        $PSK_IMAGE
+
+    wait_services $SRV_CONTAINER_NAME
+}
+
+function start_cli {
+    podman run -d --privileged --replace \
+        --name $CLI_CONTAINER_NAME --hostname hosta.example.org \
+        --network ns:/run/netns/$CLI_NET_NS_NAME \
+        $CLI_IMAGE
+    wait_services $CLI_CONTAINER_NAME
 }
 
 if [ "CHK$1" == "CHK" ];then
@@ -58,55 +80,25 @@ if [ "CHK$1" == "CHK" ];then
     exit 1
 elif [ "CHK$1" == "CHKpsk" ];then
     setup_podman_network
-    start_psk
+    start_psk_srv
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk.yml"
 fi
 
-echo "
-    routes:
-      config:
-        - destination: 0.0.0.0/0
-          state: absent
-        - destination: 0.0.0.0/0
-          next-hop-interface: br0
-          next-hop-address: 192.0.2.1
-        - destination: ::/0
-          next-hop-interface: br0
-          next-hop-address: 2001:db8:a::1
-    interfaces:
-      - name: br0
-        type: linux-bridge
-        bridge:
-          options:
-            stp:
-              enabled: false
-        ipv4:
-          enabled: true
-          dhcp: false
-          address:
-            - ip: 192.0.2.2
-              prefix-length: 24
-        ipv6:
-          enabled: true
-          dhcp: false
-          autoconf: false
-          address:
-            - ip: 2001:db8:a::2
-              prefix-length: 64
-    " | nmstatectl apply -
+start_cli
 
-
+podman exec -i $CLI_CONTAINER_NAME nmstatectl apply $NMSTATE_IPSEC_CLI_YML
 
 echo "
-To start the ipsec connection, please invoke
+Both IPSEC Server and Client container started.
 
-    nmstatectl apply -f ./ipsec/psk.yml
+You will be placed in the client container. Exit will purge both containters.
 
-To test the ipsec connection, try
+The nmstate YAML $NMSTATE_IPSEC_CLI_YML has applied.
 
-    ping $SRV_CORP_IPV4_ADDR
+To check the ipsec connection, try
+
+    ipsec status
+    ip xfrm state
+    nmcli c
 "
-
-read -n 1 -p "Press anykey to delete this container and clean up"
-
-podman rm -f $CONTAINER_ID
-clean_up
+podman exec -it $CLI_CONTAINER_NAME bash

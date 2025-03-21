@@ -1,0 +1,30 @@
+capture:
+  nic: interfaces.type==veth
+desired:
+  routes:
+    config:
+      - destination: 0.0.0.0/0
+        state: absent
+      - destination: 0.0.0.0/0
+        next-hop-interface: "{{ capture.nic.interfaces.0.name }}"
+        next-hop-address: 192.0.2.1
+      - destination: ::/0
+        next-hop-interface: "{{ capture.nic.interfaces.0.name }}"
+        next-hop-address: 2001:db8:a::1
+  interfaces:
+    - name: "{{ capture.nic.interfaces.0.name }}"
+      type: ethernet
+      ipv4:
+        enabled: true
+        dhcp: false
+        address:
+          - ip: 192.0.2.2
+            prefix-length: 24
+      ipv6:
+        enabled: true
+        dhcp: false
+        autoconf: false
+        address:
+          - ip: 2001:db8:a::2
+            prefix-length: 64
+
