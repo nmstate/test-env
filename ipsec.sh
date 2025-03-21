@@ -114,3 +114,4 @@ To check the ipsec connection, try
     nmcli c
 "
 podman exec -it $CLI_CONTAINER_NAME bash
+echo "Cleaning up"

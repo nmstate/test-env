@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+trap exit INT
+
 TAGS=(nm-c9s nm-c10s libreswan-psk-c9s libreswan-cli-c9s)
 
 for TAG in "${TAGS[@]}"; do
