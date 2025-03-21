@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAGS=(nm-c9s nm-c10s libreswan-psk-c9s)
+TAGS=(nm-c9s nm-c10s libreswan-psk-c9s libreswan-cli-c9s)
 
 for TAG in "${TAGS[@]}"; do
     podman build -f ./Containerfile.$TAG \
