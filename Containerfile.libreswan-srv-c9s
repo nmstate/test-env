@@ -7,8 +7,13 @@ RUN dnf install epel-release -y && \
     dnf clean all
 
 COPY ipsec/psk.secrets /etc/ipsec.d/psk.secrets
-COPY ipsec/psk.conf /etc/ipsec.d/psk.conf
 COPY ipsec/ipsec_srv_network.yml /etc/nmstate/ipsec_srv_network.yml
+
+COPY ipsec/pki/ipsec-srv.example.org.p12 /tmp/ipsec-srv.example.org.p12
+RUN ipsec checknss && \
+    pk12util -i /tmp/ipsec-srv.example.org.p12 \
+        -d sql:/var/lib/ipsec/nss -W "" && \
+    rm -f /tmp/ipsec-srv.example.org.p12
 
 RUN systemctl enable systemd-udevd && \
     systemctl enable NetworkManager.service && \

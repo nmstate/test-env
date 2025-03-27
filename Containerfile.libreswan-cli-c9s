@@ -1,12 +1,13 @@
 FROM quay.io/cathay4t/test-env:nm-c9s
 
-COPY ipsec/hosta.p12 /tmp/hosta.p12
+COPY ipsec/pki/cli-a.example.org.p12 /tmp/cli-a.example.org.p12
 RUN ipsec checknss && \
-    pk12util -i /tmp/hosta.p12 -d sql:/var/lib/ipsec/nss -W "" && \
-    rm -f /tmp/hosta.p12
+    pk12util -i /tmp/cli-a.example.org.p12 -d sql:/var/lib/ipsec/nss -W "" && \
+    rm -f /tmp/cli-a.example.org.p12
 
 COPY ipsec/ipsec_cli_network.yml /etc/nmstate/ipsec_cli_network.yml
-COPY ipsec/nmstate_psk.yml /root/nmstate_psk.yml
+COPY ipsec/nmstate_psk_gw.yml /root/nmstate_psk_gw.yml
+COPY ipsec/nmstate_psk_subnet.yml /root/nmstate_psk_subnet.yml
 
 RUN systemctl enable systemd-udevd && \
     systemctl enable ipsec.service && \

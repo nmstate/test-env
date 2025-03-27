@@ -14,7 +14,7 @@ CLI_NET_NS_NAME="ipsec-cli"
 SRV_CONTAINER_NAME="ipsec-srv"
 CLI_CONTAINER_NAME="ipsec-cli"
 
-PSK_IMAGE="quay.io/cathay4t/test-env:libreswan-psk-c9s"
+SRV_IMAGE="quay.io/cathay4t/test-env:libreswan-srv-c9s"
 CLI_IMAGE="quay.io/cathay4t/test-env:libreswan-cli-c9s"
 
 function pull_container_image {
@@ -66,13 +66,17 @@ function wait_services {
 
 }
 
-function start_psk_srv {
-    pull_container_image $PSK_IMAGE
+function start_srv {
+    pull_container_image $SRV_IMAGE
 
     podman run -d --privileged --replace \
-        --name $SRV_CONTAINER_NAME --hostname hostb.example.org \
+        --name $SRV_CONTAINER_NAME --hostname ipsec-srv.example.org \
         --network ns:/run/netns/$SRV_NET_NS_NAME \
-        $PSK_IMAGE
+        $SRV_IMAGE
+}
+
+function start_ipsec_service {
+    podman cp $IPSEC_CONF $SRV_CONTAINER_NAME:/etc/ipsec.d/srv.conf
 
     wait_services $SRV_CONTAINER_NAME
 }
@@ -81,7 +85,7 @@ function start_cli {
     pull_container_image $CLI_IMAGE
 
     podman run -d --privileged --replace \
-        --name $CLI_CONTAINER_NAME --hostname hosta.example.org \
+        --name $CLI_CONTAINER_NAME --hostname cli-a.example.org \
         --network ns:/run/netns/$CLI_NET_NS_NAME \
         $CLI_IMAGE
     wait_services $CLI_CONTAINER_NAME
@@ -90,12 +94,23 @@ function start_cli {
 if [ "CHK$1" == "CHK" ];then
     echo "Please define \$1, valid values: psk"
     exit 1
-elif [ "CHK$1" == "CHKpsk" ];then
-    setup_podman_network
-    start_psk_srv
-    NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk.yml"
 fi
 
+setup_podman_network
+start_srv
+
+if [ "CHK$1" == "CHKpsk" ];then
+    IPSEC_CONF="ipsec/psk_gw.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk_gw.yml"
+elif [ "CHK$1" == "CHKpsk_subnet" ];then
+    IPSEC_CONF="ipsec/psk_subnet.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk_subnet.yml"
+else
+    echo "Invalid argument. Valid are 'psk', 'psk_subnet'";
+    exit 1
+fi
+
+start_ipsec_service
 start_cli
 
 podman exec -i $CLI_CONTAINER_NAME nmstatectl apply $NMSTATE_IPSEC_CLI_YML

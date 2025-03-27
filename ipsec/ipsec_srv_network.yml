@@ -3,6 +3,12 @@ capture:
 desired:
   routes:
     config:
+    - destination: 0.0.0.0/0
+      next-hop-interface: dummy0
+      table-id: 254
+    - destination: ::/0
+      next-hop-interface: dummy0
+      table-id: 254
     - destination: 10.0.1.0/24
       next-hop-interface: "{{ capture.nic.interfaces.0.name }}"
       table-id: 254

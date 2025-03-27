@@ -1,0 +1,32 @@
+---
+interfaces:
+  - name: hosta_conn4
+    type: ipsec
+    ipv4:
+      enabled: true
+      dhcp: true
+    libreswan:
+      ipsec-interface: "99"
+      left: 192.0.2.2
+      leftid: 'cli-a.example.org'
+      right: 192.0.2.1
+      rightid: 'ipsec-srv.example.org'
+      rightsubnet: 10.0.0.0/24
+      psk: "JjyNzrnHTnMqzloKaMuq2uCfJvSSUqTYdAXqD2U2OCFyVIJUUEHmXihBbPrUcmik"
+      leftmodecfgclient: true
+      ikev2: insist
+  - name: hosta_conn6
+    type: ipsec
+    ipv4:
+      enabled: true
+      dhcp: true
+    libreswan:
+      ipsec-interface: "99"
+      left: 2001:db8:a::2
+      leftid: 'cli-a.example.org'
+      right: 2001:db8:a::1
+      rightid: 'ipsec-srv.example.org'
+      rightsubnet: fd00:a::/64
+      psk: "JjyNzrnHTnMqzloKaMuq2uCfJvSSUqTYdAXqD2U2OCFyVIJUUEHmXihBbPrUcmik"
+      leftmodecfgclient: true
+      ikev2: insist
