@@ -110,8 +110,8 @@ else
     exit 1
 fi
 
-start_ipsec_service
 start_cli
+start_ipsec_service
 
 podman exec -i $CLI_CONTAINER_NAME nmstatectl apply $NMSTATE_IPSEC_CLI_YML
 
