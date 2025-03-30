@@ -29,6 +29,18 @@ for host in "ipsec-srv.example.org" "cli-a.example.org"; do
 done
 ```
 
+# Steps to create p12 for public key only
+
+```bash
+for host in "ipsec-srv.example.org" "cli-a.example.org"; do
+    # Empty passwd used for p12
+    openssl pkcs12 -export -in ${host}.crt \
+        -certfile ca.crt \
+        -passout pass:"" \
+        -out ${host}-pub.p12 -name ${host}
+done
+```
+
 ## Steps to import p12 into ipsec NSS
 
 * Interactive way

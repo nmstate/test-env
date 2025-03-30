@@ -1,6 +1,6 @@
 ---
 interfaces:
-  - name: hosta_conn4
+  - name: ipsec_conn4
     type: ipsec
     ipv4:
       enabled: true
@@ -15,7 +15,7 @@ interfaces:
       psk: "JjyNzrnHTnMqzloKaMuq2uCfJvSSUqTYdAXqD2U2OCFyVIJUUEHmXihBbPrUcmik"
       leftmodecfgclient: true
       ikev2: insist
-  - name: hosta_conn6
+  - name: ipsec_conn6
     type: ipsec
     ipv4:
       enabled: true

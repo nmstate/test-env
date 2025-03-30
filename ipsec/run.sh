@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 IPSEC_SRV_IPV4_SUBNET="192.0.2.0/24"
 IPSEC_SRV_IPV6_SUBNET="2001:db8:a::/64"
 SEV_IPSEC_IPV4_ADDR="192.0.2.1"
@@ -91,6 +93,10 @@ function start_cli {
     wait_services $CLI_CONTAINER_NAME
 }
 
+#### Main function starts
+
+cd $SCRIPT_DIR
+
 if [ "CHK$1" == "CHK" ];then
     echo "Please define \$1, valid values: psk"
     exit 1
@@ -100,13 +106,19 @@ setup_podman_network
 start_srv
 
 if [ "CHK$1" == "CHKpsk" ];then
-    IPSEC_CONF="ipsec/psk_gw.conf"
+    IPSEC_CONF="psk_gw.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk_gw.yml"
 elif [ "CHK$1" == "CHKpsk_subnet" ];then
-    IPSEC_CONF="ipsec/psk_subnet.conf"
+    IPSEC_CONF="psk_subnet.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk_subnet.yml"
+elif [ "CHK$1" == "CHKrsa" ];then
+    IPSEC_CONF="rsa_gw.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_rsa_gw.yml"
+elif [ "CHK$1" == "CHKcert" ];then
+    IPSEC_CONF="cert_gw.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_cert_gw.yml"
 else
-    echo "Invalid argument. Valid are 'psk', 'psk_subnet'";
+    echo "Invalid argument. Valid are 'psk', 'psk_subnet', 'rsa', 'cert'";
     exit 1
 fi
 

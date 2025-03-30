@@ -8,7 +8,7 @@ if [ "CHK$1" == "CHKnm" ];then
     ./nm.sh "$@"
 elif [ "CHK$1" == "CHKipsec" ];then
     shift
-    ./ipsec.sh "$@"
+    ./ipsec/run.sh "$@"
 else
     echo "Usage: ./run.sh [nm|ipsec] ..."
     exit 1

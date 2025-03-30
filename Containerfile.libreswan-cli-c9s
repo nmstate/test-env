@@ -3,11 +3,14 @@ FROM quay.io/cathay4t/test-env:nm-c9s
 COPY ipsec/pki/cli-a.example.org.p12 /tmp/cli-a.example.org.p12
 RUN ipsec checknss && \
     pk12util -i /tmp/cli-a.example.org.p12 -d sql:/var/lib/ipsec/nss -W "" && \
+    certutil -M -n "Easy-RSA CA" -t CT  -d sql:/var/lib/ipsec/nss/ && \
     rm -f /tmp/cli-a.example.org.p12
 
 COPY ipsec/ipsec_cli_network.yml /etc/nmstate/ipsec_cli_network.yml
 COPY ipsec/nmstate_psk_gw.yml /root/nmstate_psk_gw.yml
 COPY ipsec/nmstate_psk_subnet.yml /root/nmstate_psk_subnet.yml
+COPY ipsec/nmstate_rsa_gw.yml /root/nmstate_rsa_gw.yml
+COPY ipsec/nmstate_cert_gw.yml /root/nmstate_cert_gw.yml
 
 RUN systemctl enable systemd-udevd && \
     systemctl enable ipsec.service && \
