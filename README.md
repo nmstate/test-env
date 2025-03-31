@@ -19,3 +19,21 @@ sudo ./run.sh nm c9s
 ```bash
 sudo ./run.sh ipsec psk
 ```
+
+## IPSec server with RSA authentication on CentOS Stream 9
+
+```bash
+sudo ./run.sh ipsec rsa
+```
+
+## IPSec server with PKI authentication on CentOS Stream 9
+
+```bash
+sudo ./run.sh ipsec cert
+```
+
+## IPSec P2P connection
+
+```bash
+sudo ./run.sh ipsec p2p
+```

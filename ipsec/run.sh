@@ -117,8 +117,12 @@ elif [ "CHK$1" == "CHKrsa" ];then
 elif [ "CHK$1" == "CHKcert" ];then
     IPSEC_CONF="cert_gw.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_cert_gw.yml"
+elif [ "CHK$1" == "CHKp2p" ];then
+    IPSEC_CONF="p2p.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_p2p_gw.yml"
 else
-    echo "Invalid argument. Valid are 'psk', 'psk_subnet', 'rsa', 'cert'";
+    echo "Invalid argument."
+    echo "Valid are 'psk', 'psk_subnet', 'rsa', 'cert', 'p2p'"
     exit 1
 fi
 
