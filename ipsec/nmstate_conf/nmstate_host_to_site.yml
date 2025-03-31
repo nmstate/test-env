@@ -1,0 +1,34 @@
+---
+interfaces:
+  - name: ipsec_conn4
+    type: ipsec
+    ipv4:
+      enabled: true
+      dhcp: true
+    libreswan:
+      ipsec-interface: "98"
+      left: 192.0.2.2
+      leftid: '%fromcert'
+      leftcert: cli-a.example.org
+      leftrsasigkey: '%cert'
+      leftmodecfgclient: true
+      right: 192.0.2.1
+      rightsubnet: 10.0.0.0/24
+      rightid: '%fromcert'
+      ikev2: insist
+  - name: ipsec_conn6
+    type: ipsec
+    ipv6:
+      enabled: true
+      dhcp: true
+    libreswan:
+      ipsec-interface: "99"
+      left: 2001:db8:a::2
+      leftid: '%fromcert'
+      leftcert: cli-a.example.org
+      leftmodecfgclient: true
+      right: 2001:db8:a::1
+      rightid: '%fromcert'
+      rightsubnet: fd00:a::/64
+      leftmodecfgclient: true
+      ikev2: insist

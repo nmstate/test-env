@@ -117,15 +117,19 @@ elif [ "CHK$1" == "CHKcert" ];then
 elif [ "CHK$1" == "CHKp2p" ];then
     IPSEC_CONF="libreswan_conf/p2p.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_p2p_gw.yml"
-elif [ "CHK$1" == "CHKsubnet" ];then
-    IPSEC_CONF="libreswan_conf/cert_subnet.conf"
-    NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_cert_subnet.yml"
+elif [ "CHK$1" == "CHKsite2site" ];then
+    IPSEC_CONF="libreswan_conf/cert_site_to_site.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_site_to_site.yml"
 elif [ "CHK$1" == "CHKtransport" ];then
     IPSEC_CONF="libreswan_conf/transport.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_transport.yml"
+elif [ "CHK$1" == "CHKhost2site" ];then
+    IPSEC_CONF="libreswan_conf/host_to_site.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_host_to_site.yml"
 else
     echo "Invalid argument."
-    echo "Valid are 'psk', 'rsa', 'cert', 'p2p', 'subnet', 'transport'."
+    echo "Valid are 'psk', 'rsa', 'cert', 'p2p', 'site2site', 'transport', "
+    echo "'host2site'."
     exit 1
 fi
 
