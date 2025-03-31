@@ -17,7 +17,7 @@ interfaces:
       ikev2: insist
   - name: ipsec_conn6
     type: ipsec
-    ipv4:
+    ipv6:
       enabled: true
       dhcp: true
     libreswan:
