@@ -7,11 +7,7 @@ RUN ipsec checknss && \
     rm -f /tmp/cli-a.example.org.p12
 
 COPY ipsec/ipsec_cli_network.yml /etc/nmstate/ipsec_cli_network.yml
-COPY ipsec/nmstate_psk_gw.yml /root/nmstate_psk_gw.yml
-COPY ipsec/nmstate_rsa_gw.yml /root/nmstate_rsa_gw.yml
-COPY ipsec/nmstate_cert_gw.yml /root/nmstate_cert_gw.yml
-COPY ipsec/nmstate_p2p.yml /root/nmstate_p2p.yml
-COPY ipsec/nmstate_cert_subnet.yml /root/nmstate_cert_subnet.yml
+COPY ipsec/nmstate_conf /root/nmstate_conf
 
 RUN systemctl enable systemd-udevd && \
     systemctl enable ipsec.service && \
