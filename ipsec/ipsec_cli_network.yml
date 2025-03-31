@@ -27,4 +27,18 @@ desired:
         address:
           - ip: 2001:db8:a::2
             prefix-length: 64
-
+    - name: dummy0
+      type: ethernet
+      ipv4:
+        enabled: true
+        dhcp: false
+        address:
+          - ip: 10.0.9.2
+            prefix-length: 24
+      ipv6:
+        enabled: true
+        dhcp: false
+        autoconf: false
+        address:
+          - ip: fd00:9::2
+            prefix-length: 64

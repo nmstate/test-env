@@ -108,9 +108,6 @@ start_srv
 if [ "CHK$1" == "CHKpsk" ];then
     IPSEC_CONF="psk_gw.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk_gw.yml"
-elif [ "CHK$1" == "CHKpsk_subnet" ];then
-    IPSEC_CONF="psk_subnet.conf"
-    NMSTATE_IPSEC_CLI_YML="/root/nmstate_psk_subnet.yml"
 elif [ "CHK$1" == "CHKrsa" ];then
     IPSEC_CONF="rsa_gw.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_rsa_gw.yml"
@@ -120,9 +117,12 @@ elif [ "CHK$1" == "CHKcert" ];then
 elif [ "CHK$1" == "CHKp2p" ];then
     IPSEC_CONF="p2p.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_p2p_gw.yml"
+elif [ "CHK$1" == "CHKsubnet" ];then
+    IPSEC_CONF="p2p.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_cert_subnet_gw.yml"
 else
     echo "Invalid argument."
-    echo "Valid are 'psk', 'psk_subnet', 'rsa', 'cert', 'p2p'"
+    echo "Valid are 'psk', 'rsa', 'cert', 'p2p', 'subnet'."
     exit 1
 fi
 

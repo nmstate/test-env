@@ -37,3 +37,9 @@ sudo ./run.sh ipsec cert
 ```bash
 sudo ./run.sh ipsec p2p
 ```
+
+## IPSec Site-to-Site connection (subnet)
+
+```bash
+sudo ./run.sh ipsec subnet
+```
