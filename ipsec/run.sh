@@ -97,14 +97,6 @@ function start_cli {
 
 cd $SCRIPT_DIR
 
-if [ "CHK$1" == "CHK" ];then
-    echo "Please define \$1, valid values: psk"
-    exit 1
-fi
-
-setup_podman_network
-start_srv
-
 if [ "CHK$1" == "CHKpsk" ];then
     IPSEC_CONF="libreswan_conf/psk_gw.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_psk_gw.yml"
@@ -118,7 +110,7 @@ elif [ "CHK$1" == "CHKp2p" ];then
     IPSEC_CONF="libreswan_conf/p2p.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_p2p_gw.yml"
 elif [ "CHK$1" == "CHKsite2site" ];then
-    IPSEC_CONF="libreswan_conf/cert_site_to_site.conf"
+    IPSEC_CONF="libreswan_conf/site_to_site.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_site_to_site.yml"
 elif [ "CHK$1" == "CHKtransport" ];then
     IPSEC_CONF="libreswan_conf/transport.conf"
@@ -126,12 +118,18 @@ elif [ "CHK$1" == "CHKtransport" ];then
 elif [ "CHK$1" == "CHKhost2site" ];then
     IPSEC_CONF="libreswan_conf/host_to_site.conf"
     NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_host_to_site.yml"
+elif [ "CHK$1" == "CHKmix46" ];then
+    IPSEC_CONF="libreswan_conf/4in6_6in4.conf"
+    NMSTATE_IPSEC_CLI_YML="/root/nmstate_conf/nmstate_4in6_6in4.yml"
 else
     echo "Invalid argument."
-    echo "Valid are 'psk', 'rsa', 'cert', 'p2p', 'site2site', 'transport', "
-    echo "'host2site'."
+    echo -n "Valid are 'psk', 'rsa', 'cert', 'p2p', 'site2site', 'transport', "
+    echo "'host2site', 'mix46'."
     exit 1
 fi
+
+setup_podman_network
+start_srv
 
 start_cli
 start_ipsec_service

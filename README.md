@@ -14,19 +14,19 @@ sudo ./run.sh nm c10s
 sudo ./run.sh nm c9s
 ```
 
-## IPSec server with PSK authentication on CentOS Stream 9
+## IPSec using PSK authentication
 
 ```bash
 sudo ./run.sh ipsec psk
 ```
 
-## IPSec server with RSA authentication on CentOS Stream 9
+## IPSec using RSA authentication
 
 ```bash
 sudo ./run.sh ipsec rsa
 ```
 
-## IPSec server with PKI authentication on CentOS Stream 9
+## IPSec using PKI authentication
 
 ```bash
 sudo ./run.sh ipsec cert
@@ -38,8 +38,26 @@ sudo ./run.sh ipsec cert
 sudo ./run.sh ipsec p2p
 ```
 
-## IPSec Site-to-Site connection (subnet)
+## IPSec Site-to-Site connection
 
 ```bash
-sudo ./run.sh ipsec subnet
+sudo ./run.sh ipsec site2site
+```
+
+## IPSec Transport connection (p2p only)
+
+```bash
+sudo ./run.sh ipsec transport
+```
+
+## IPSec Host-to-Site connection
+
+```bash
+sudo ./run.sh ipsec host2site
+```
+
+## IPSec IPv4 in IPv6 and IPv6 in IPv4 connection
+
+```bash
+sudo ./run.sh ipsec mix46
 ```
