@@ -28,7 +28,7 @@ desired:
           - ip: 2001:db8:a::2
             prefix-length: 64
     - name: dummy0
-      type: ethernet
+      type: dummy
       ipv4:
         enabled: true
         dhcp: false
