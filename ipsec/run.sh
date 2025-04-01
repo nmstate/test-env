@@ -16,8 +16,8 @@ CLI_NET_NS_NAME="ipsec-cli"
 SRV_CONTAINER_NAME="ipsec-srv"
 CLI_CONTAINER_NAME="ipsec-cli"
 
-SRV_IMAGE="quay.io/cathay4t/test-env:libreswan-srv-c9s"
-CLI_IMAGE="quay.io/cathay4t/test-env:libreswan-cli-c9s"
+SRV_IMAGE="quay.io/nmstate/test-env:libreswan-srv-c9s"
+CLI_IMAGE="quay.io/nmstate/test-env:libreswan-cli-c9s"
 
 function pull_container_image {
     local container_id=$1

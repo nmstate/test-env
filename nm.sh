@@ -1,13 +1,13 @@
 #!/bin/bash -x
 
-IMAGE="quay.io/cathay4t/nm-c10s"
+IMAGE="quay.io/nmstate/nm-c10s"
 NAME="nm-c10s"
 
 if [ "CHK$1" == "CHKc9s" ];then
-    IMAGE="quay.io/cathay4t/nm-c9s"
+    IMAGE="quay.io/nmstate/nm-c9s"
     NAME="nm-c9s"
 elif [ "CHK$1" == "CHKc10s" ];then
-    IMAGE="quay.io/cathay4t/nm-c10s"
+    IMAGE="quay.io/nmstate/nm-c10s"
     NAME="nm-c10s"
 fi
 

@@ -1,4 +1,4 @@
-FROM quay.io/cathay4t/test-env:nm-c9s
+FROM quay.io/nmstate/test-env:nm-c9s
 
 COPY ipsec/pki/cli-a.example.org.p12 /tmp/cli-a.example.org.p12
 RUN ipsec checknss && \

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE="quay.io/cathay4t/nm-c10s"
+IMAGE="quay.io/nmstate/nm-c10s"
 NAME="nm-c10s"
 
 if [ "CHK$1" == "CHKnm" ];then

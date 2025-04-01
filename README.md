@@ -1,6 +1,6 @@
 # Containers for test usage
 
-The containers are stored in (https://quay.io/repository/cathay4t/test-env)
+The containers are stored in (https://quay.io/repository/nmstate/test-env)
 
 ## NetworkManager on CentOS Stream 10
 
