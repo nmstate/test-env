@@ -1,7 +1,6 @@
 FROM quay.io/centos/centos:stream9
 
-RUN dnf install epel-release -y && \
-    dnf install systemd systemd-udev vim net-tools \
+RUN dnf install systemd systemd-udev vim net-tools \
         tcpdump iproute procps-ng nispor libreswan iputils \
         nmstate NetworkManager -y && \
     dnf clean all

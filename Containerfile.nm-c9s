@@ -1,11 +1,9 @@
 FROM quay.io/centos/centos:stream9
 
-RUN dnf install epel-release -y && \
-    dnf install \
-        systemd systemd-udev NetworkManager nftables openvpn vim net-tools \
-        NetworkManager-openvpn wireguard-tools \
-        libreswan NetworkManager-libreswan git \
-        dnsmasq wget lighttpd tcpdump iproute procps-ng nispor nmstate -y && \
+RUN dnf install \
+        systemd-udev NetworkManager nftables vim net-tools \
+        wireguard-tools libreswan NetworkManager-libreswan git \
+        dnsmasq wget tcpdump iproute procps-ng nispor nmstate -y && \
     dnf clean all
 
 RUN find /etc/NetworkManager/system-connections/ -type f -exec rm -v {} \;
