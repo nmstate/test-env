@@ -1,19 +1,20 @@
 #!/bin/bash -x
 
-IMAGE="quay.io/nmstate/nm-c10s"
+TAG="nm-c10s"
 NAME="nm-c10s"
 
 if [ "CHK$1" == "CHKc9s" ];then
-    IMAGE="quay.io/nmstate/nm-c9s"
+    TAG="nm-c9s"
     NAME="nm-c9s"
 elif [ "CHK$1" == "CHKc10s" ];then
-    IMAGE="quay.io/nmstate/nm-c10s"
+    TAG="nm-c10s"
     NAME="nm-c10s"
 fi
 
+IMAGE="quay.io/nmstate/test-env:$TAG"
+
 CONTAINER_ID=`podman run --systemd=true --privileged -d \
     --hostname $NAME \
-    -v $HOME:$HOME \
     $IMAGE `
 
 podman exec -i $CONTAINER_ID \
