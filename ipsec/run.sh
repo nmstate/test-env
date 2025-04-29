@@ -100,7 +100,6 @@ function start_cli {
     podman run -d --privileged --replace \
         --name $CLI_CONTAINER_NAME --hostname cli-a.example.org \
         --network ns:/run/netns/$CLI_NET_NS_NAME \
-        --network bridge
         $CLI_IMAGE
     wait_services $CLI_CONTAINER_NAME
 }
@@ -151,7 +150,7 @@ fi
 
 SRV_ONLY=0
 
-if [[ "$@" != *"--server-only"* ]]; then
+if [[ "$@" == *"--server-only"* ]]; then
     SRV_ONLY=1
 fi
 
