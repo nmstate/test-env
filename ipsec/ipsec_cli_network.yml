@@ -1,5 +1,5 @@
 capture:
-  nic: interfaces.type==veth
+  nic: interfaces.mac-address == "00:23:45:67:89:EF"
 desired:
   routes:
     config:

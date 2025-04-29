@@ -18,6 +18,7 @@ CLI_NIC_NAME="ipsec_cli"
 SRV_CONTAINER_NAME="ipsec-srv"
 CLI_CONTAINER_NAME="ipsec-cli"
 
+CLI_NIC_MAC="00:23:45:67:89:ef"
 SRV_IMAGE="quay.io/nmstate/test-env:libreswan-srv-c9s"
 CLI_IMAGE="quay.io/nmstate/test-env:libreswan-cli-c9s"
 
@@ -49,7 +50,8 @@ function setup_podman_network {
     if [[ $SRV_ONLY -eq 0 ]]; then
         ip netns add $CLI_NET_NS_NAME
     fi
-    ip link add $CLI_NIC_NAME type veth peer $SRV_NIC_NAME
+    ip link add $CLI_NIC_NAME address ${CLI_NIC_MAC} \
+        type veth peer $SRV_NIC_NAME
     ip link set $SRV_NIC_NAME netns $SRV_NET_NS_NAME
     ip netns exec $SRV_NET_NS_NAME ip link set $SRV_NIC_NAME up
     if [[ $SRV_ONLY -eq 0 ]]; then
