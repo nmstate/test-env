@@ -3,6 +3,10 @@
 IMAGE="quay.io/nmstate/nm-c10s"
 NAME="nm-c10s"
 
+SCRIPT_DIR=$(dirname -- "$( readlink -f -- "$0"; )")
+
+cd $SCRIPT_DIR
+
 if [ "CHK$1" == "CHKnm" ];then
     shift
     ./nm.sh "$@"

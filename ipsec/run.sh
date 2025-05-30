@@ -41,8 +41,6 @@ function clean_up {
     ipsec initnss || true
 }
 
-trap clean_up EXIT
-
 function setup_podman_network {
     clean_up
 
@@ -149,6 +147,8 @@ else
     echo "Use --server-only for creating server container only"
     exit 1
 fi
+
+trap clean_up EXIT
 
 SRV_ONLY=0
 
