@@ -4,7 +4,7 @@ interfaces:
     type: ipsec
     libreswan:
       type: transport
-      ipsec-interface: "98"
+      ipsec-interface: "no"
       left: 192.0.2.2
       leftid: '%fromcert'
       leftcert: cli-a.example.org
@@ -18,7 +18,7 @@ interfaces:
     type: ipsec
     libreswan:
       type: transport
-      ipsec-interface: "99"
+      ipsec-interface: "no"
       left: 2001:db8:a::2
       leftid: '%fromcert'
       leftcert: cli-a.example.org
