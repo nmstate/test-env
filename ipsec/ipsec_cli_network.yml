@@ -8,9 +8,11 @@ desired:
       - destination: 0.0.0.0/0
         next-hop-interface: "{{ capture.nic.interfaces.0.name }}"
         next-hop-address: 192.0.2.1
+        metric: 100
       - destination: ::/0
         next-hop-interface: "{{ capture.nic.interfaces.0.name }}"
         next-hop-address: 2001:db8:a::1
+        metric: 100
   interfaces:
     - name: "{{ capture.nic.interfaces.0.name }}"
       type: ethernet
