@@ -1,4 +1,5 @@
 #!/bin/bash -x
+# SPDX-License-Identifier: Apache-2.0
 
 TAG="nm-c10s"
 NAME="nm-c10s"

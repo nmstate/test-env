@@ -17,6 +17,9 @@
 <!-- vim-markdown-toc -->
 
 The containers are stored in (https://quay.io/repository/nmstate/test-env)
+
+All files licensed under Apache 2.0.
+
 # Containers for test usage
 
 ## NetworkManager

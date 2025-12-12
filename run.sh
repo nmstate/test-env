@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: Apache-2.0
 
 IMAGE="quay.io/nmstate/nm-c10s"
 NAME="nm-c10s"
