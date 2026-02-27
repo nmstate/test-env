@@ -1,0 +1,88 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            cd:74:39:dc:81:aa:b7:00:7e:e9:b6:95:c5:ed:1a:37
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=Easy-RSA CA
+        Validity
+            Not Before: Feb 27 06:45:19 2026 GMT
+            Not After : Feb  3 06:45:19 2126 GMT
+        Subject: CN=ieee802-1x-cli-a.example.org
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:95:30:62:11:71:04:66:36:5b:cf:90:c6:22:02:
+                    46:4c:77:5b:06:76:b2:e5:ae:45:65:6e:df:32:e1:
+                    b1:12:aa:3e:37:cd:9b:55:a1:d0:ed:69:85:94:72:
+                    57:2c:1f:48:c3:11:52:ad:30:4c:e1:dc:a0:16:b8:
+                    ec:99:fd:26:47:91:4a:ab:af:a3:0d:34:b4:fd:48:
+                    34:29:ba:09:20:19:92:af:06:5b:78:a8:92:ac:22:
+                    c2:df:51:1e:17:67:1a:59:8b:06:d6:6a:2c:07:ca:
+                    e4:94:d7:af:c6:c1:55:da:3a:ae:b7:83:eb:01:30:
+                    97:1d:37:c6:e3:96:dd:7d:f8:a2:56:9b:f9:a2:71:
+                    30:24:d4:e7:6e:13:bf:65:85:06:28:af:08:ab:69:
+                    ed:33:cf:a9:bf:20:53:70:b7:36:9f:8a:71:b1:84:
+                    19:1b:7b:5e:61:81:4e:7a:af:34:b3:96:42:32:d7:
+                    31:d8:1f:9f:0b:32:42:cc:37:46:7e:41:01:0a:c6:
+                    25:e2:a8:ab:00:38:fb:92:98:9f:94:b1:dd:fc:d9:
+                    69:ee:83:58:40:05:bb:b0:89:93:d4:2d:52:c0:0f:
+                    fe:d7:57:4d:2d:53:2a:50:5d:83:24:4a:80:63:71:
+                    ec:9d:5f:52:e3:c1:ba:04:f2:b5:6f:35:82:44:14:
+                    67:49
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                83:DC:E4:8F:0C:F8:C9:61:A1:38:40:6D:F5:87:08:C5:BF:F8:40:94
+            X509v3 Authority Key Identifier: 
+                keyid:16:F7:FC:E8:1D:A2:39:FB:4E:3A:04:BD:48:C5:68:B0:40:2A:C5:21
+                DirName:/CN=Easy-RSA CA
+                serial:7D:EE:CB:ED:05:91:26:72:2D:02:F7:51:BF:2B:B2:EB:21:A2:96:0C
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Key Usage: 
+                Digital Signature
+            X509v3 Subject Alternative Name: 
+                DNS:ieee802-1x-cli-a.example.org
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        46:46:08:a3:9c:da:ed:de:c6:69:6a:19:9a:d0:d2:ac:d1:af:
+        91:2b:61:3e:61:73:ef:5d:85:b8:98:7f:00:4c:6a:54:c9:56:
+        75:27:b1:ca:2b:21:26:b7:a6:60:32:82:1d:f2:a1:76:9e:75:
+        8b:fb:8e:68:df:22:e2:f4:ea:7a:54:8e:75:36:67:f0:22:37:
+        4b:c9:33:c6:cc:a5:84:f9:29:80:39:41:bb:98:76:ea:06:f3:
+        74:8a:02:1a:b3:48:c4:47:94:c8:fd:db:90:7b:e7:f2:03:1f:
+        7c:33:01:8d:7b:e6:20:a9:30:43:ca:b3:51:2b:51:bf:f3:6c:
+        bb:f2:d4:f2:a9:9d:d9:c2:f5:8a:f8:de:ed:47:2e:11:1d:91:
+        a7:91:b3:62:1b:68:da:5c:b9:3d:82:8a:22:ac:52:90:ce:fb:
+        64:61:29:e7:c5:7c:51:67:3c:1e:4f:a8:c8:38:1b:b6:ba:13:
+        c4:4c:9e:9f:db:8b:73:1b:fc:02:9f:6f:ae:ad:af:90:e8:87:
+        e2:f2:2b:0c:45:35:6c:62:31:a8:d9:4e:82:ff:4e:4a:ee:66:
+        38:92:3f:40:22:a9:8b:65:9d:8c:b0:58:a7:26:40:1c:3e:3a:
+        2c:4d:99:71:76:e2:ff:eb:4f:9f:78:85:7f:78:b2:63:a6:ce:
+        4c:1d:14:60
+-----BEGIN CERTIFICATE-----
+MIIDljCCAn6gAwIBAgIRAM10OdyBqrcAfum2lcXtGjcwDQYJKoZIhvcNAQELBQAw
+FjEUMBIGA1UEAwwLRWFzeS1SU0EgQ0EwIBcNMjYwMjI3MDY0NTE5WhgPMjEyNjAy
+MDMwNjQ1MTlaMCcxJTAjBgNVBAMMHGllZWU4MDItMXgtY2xpLWEuZXhhbXBsZS5v
+cmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCVMGIRcQRmNlvPkMYi
+AkZMd1sGdrLlrkVlbt8y4bESqj43zZtVodDtaYWUclcsH0jDEVKtMEzh3KAWuOyZ
+/SZHkUqrr6MNNLT9SDQpugkgGZKvBlt4qJKsIsLfUR4XZxpZiwbWaiwHyuSU16/G
+wVXaOq63g+sBMJcdN8bjlt19+KJWm/micTAk1OduE79lhQYorwirae0zz6m/IFNw
+tzafinGxhBkbe15hgU56rzSzlkIy1zHYH58LMkLMN0Z+QQEKxiXiqKsAOPuSmJ+U
+sd382Wnug1hABbuwiZPULVLAD/7XV00tUypQXYMkSoBjceydX1LjwboE8rVvNYJE
+FGdJAgMBAAGjgcswgcgwCQYDVR0TBAIwADAdBgNVHQ4EFgQUg9zkjwz4yWGhOEBt
+9YcIxb/4QJQwUQYDVR0jBEowSIAUFvf86B2iOftOOgS9SMVosEAqxSGhGqQYMBYx
+FDASBgNVBAMMC0Vhc3ktUlNBIENBghR97svtBZEmci0C91G/K7LrIaKWDDATBgNV
+HSUEDDAKBggrBgEFBQcDAjALBgNVHQ8EBAMCB4AwJwYDVR0RBCAwHoIcaWVlZTgw
+Mi0xeC1jbGktYS5leGFtcGxlLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEARkYIo5za
+7d7GaWoZmtDSrNGvkSthPmFz712FuJh/AExqVMlWdSexyishJremYDKCHfKhdp51
+i/uOaN8i4vTqelSOdTZn8CI3S8kzxsylhPkpgDlBu5h26gbzdIoCGrNIxEeUyP3b
+kHvn8gMffDMBjXvmIKkwQ8qzUStRv/Nsu/LU8qmd2cL1ivje7UcuER2Rp5GzYhto
+2ly5PYKKIqxSkM77ZGEp58V8UWc8Hk+oyDgbtroTxEyen9uLcxv8Ap9vrq2vkOiH
+4vIrDEU1bGIxqNlOgv9OSu5mOJI/QCKpi2WdjLBYpyZAHD46LE2ZcXbi/+tPn3iF
+f3iyY6bOTB0UYA==
+-----END CERTIFICATE-----

@@ -4,6 +4,7 @@
     * [NetworkManager](#networkmanager)
         * [NetworkManager on CentOS Stream 10](#networkmanager-on-centos-stream-10)
         * [NetworkManager on CentOS Stream 9](#networkmanager-on-centos-stream-9)
+    * [802.1X Authentication](#8021x-authentication)
     * [IPSec](#ipsec)
         * [IPSec using PSK authentication](#ipsec-using-psk-authentication)
         * [IPSec using RSA authentication](#ipsec-using-rsa-authentication)
@@ -34,6 +35,22 @@ sudo ./run.sh nm c10s
 
 ```bash
 sudo ./run.sh nm c9s
+```
+
+## 802.1X Authentication
+
+```bash
+sudo ./run.sh 802_1x
+# Afterwards, you may use `802_1x_cli` interface for 802.1x authentication.
+```
+
+Please be aware the container is purely `authenticator`, it has NO firewall
+rule to drop unauthenticated packet. You may use check `hostapd` log to know
+whether client is authenticated. Example of log of authenticated client:
+
+```text
+Feb 27 07:01:31 802-1x-srv.example.org hostapd[53]: 802_1x_srv: STA
+00:23:45:67:ef:bc IEEE 802.1X: authenticated - EAP type: 0 (unknown)
 ```
 
 ## IPSec

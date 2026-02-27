@@ -14,6 +14,9 @@ if [ "CHK$1" == "CHKnm" ];then
 elif [ "CHK$1" == "CHKipsec" ];then
     shift
     ./ipsec/run.sh "$@"
+elif [ "CHK$1" == "CHK802_1x" ];then
+    shift
+    ./802_1x/run.sh "$@"
 else
     echo "Usage: ./run.sh [nm|ipsec] ..."
     exit 1

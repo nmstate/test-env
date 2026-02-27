@@ -1,0 +1,13 @@
+---
+interfaces:
+  - name: 802_1x_cli
+    type: ethernet
+    state: up
+    802.1x:
+      ca-cert: /etc/pki/802-1x-test/ca.crt
+      client-cert: /etc/pki/802-1x-test/ieee802-1x-cli-a.example.org.crt
+      eap-methods:
+        - tls
+      identity: ieee802-1x-cli-a.example.org
+      private-key: /etc/pki/802-1x-test/ieee802-1x-cli-a.example.org.key
+      private-key-password: password
