@@ -1,0 +1,17 @@
+# Please use this container only through `test-env/run.sh 8021x` to
+# have property network interface setup.
+
+FROM quay.io/centos/centos:stream10
+
+RUN dnf install procps-ng iproute hostapd tcpdump -y && dnf clean all
+
+COPY 802_1x/pki/ca.crt /etc/hostapd/ca.crt
+COPY 802_1x/pki/dh.pem /etc/hostapd/dh.pem
+COPY 802_1x/pki/ieee802-1x-srv.example.org.crt /etc/hostapd/
+COPY 802_1x/pki/ieee802-1x-srv.example.org.key /etc/hostapd/
+COPY 802_1x/hostapd.eap_user /etc/hostapd/hostapd.eap_user
+COPY 802_1x/hostapd.conf /etc/hostapd/hostapd.conf
+
+RUN systemctl enable hostapd.service
+
+CMD ["/usr/sbin/init"]

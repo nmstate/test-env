@@ -2,9 +2,11 @@
 
 trap exit INT
 
+PROJECT_BASE_DIR=$(readlink -f "$(dirname -- "$0")");
+
 echo "Make sure you have \`qemu-user-static\` installed"
 
-TAGS=(nm-c9s nm-c10s libreswan-srv-c9s libreswan-cli-c9s)
+TAGS=(nm-c9s nm-c10s libreswan-srv-c9s libreswan-cli-c9s 8021x-srv-c10s)
 
 
 for TAG in "${TAGS[@]}"; do
@@ -14,7 +16,7 @@ for TAG in "${TAGS[@]}"; do
     podman manifest create $IMAGE
     podman build \
         --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x \
-        -f ./Containerfile.$TAG \
-        --manifest $IMAGE
+        -f ./containers/Containerfile.$TAG \
+        --manifest $IMAGE $PROJECT_BASE_DIR
     podman manifest push $IMAGE
 done
