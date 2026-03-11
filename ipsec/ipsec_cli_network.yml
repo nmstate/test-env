@@ -37,10 +37,14 @@ desired:
         address:
           - ip: 10.0.9.2
             prefix-length: 24
+          - ip: 10.0.10.2
+            prefix-length: 24
       ipv6:
         enabled: true
         dhcp: false
         autoconf: false
         address:
           - ip: fd00:9::2
+            prefix-length: 64
+          - ip: fd00:10::2
             prefix-length: 64
