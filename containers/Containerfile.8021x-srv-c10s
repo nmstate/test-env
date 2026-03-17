@@ -3,7 +3,8 @@
 
 FROM quay.io/centos/centos:stream10
 
-RUN dnf install procps-ng iproute hostapd tcpdump -y && dnf clean all
+RUN dnf install procps-ng iproute hostapd tcpdump wireshark-cli -y && \
+    dnf clean all
 
 COPY 802_1x/pki/ca.crt /etc/hostapd/ca.crt
 COPY 802_1x/pki/dh.pem /etc/hostapd/dh.pem

@@ -18,6 +18,6 @@ elif [ "CHK$1" == "CHK802_1x" ];then
     shift
     ./802_1x/run.sh "$@"
 else
-    echo "Usage: ./run.sh [nm|ipsec] ..."
+    echo "Usage: ./run.sh [nm|ipsec|802_1x] ..."
     exit 1
 fi
