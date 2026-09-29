@@ -2,7 +2,7 @@ FROM quay.io/centos/centos:stream10-development
 
 RUN dnf install systemd systemd-udev net-tools \
         tcpdump iproute procps-ng libreswan iputils \
-        nmstate NetworkManager -y && \
+        nmstate NetworkManager openssl -y && \
     dnf clean all
 
 COPY ipsec/psk.secrets /etc/ipsec.d/psk.secrets
