@@ -17,8 +17,9 @@ rpm -q qemu-user-static 1>/dev/null 2>/dev/null || \
     (echo "Please install qemu-user-static"; exit 1)
 
 echo "Make sure you have \`qemu-user-static\` installed"
+echo "libreswan-srv-c10s includes patched libreswan 5.4-2 (fix #3030)"
 
-TAGS=(nm-c9s nm-c10s libreswan-srv-c9s libreswan-cli-c9s 8021x-srv-c10s)
+TAGS=(nm-c9s nm-c10s libreswan-srv-c9s libreswan-srv-c10s libreswan-cli-c9s 8021x-srv-c10s)
 
 
 for TAG in "${TAGS[@]}"; do
