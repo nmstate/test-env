@@ -22,6 +22,8 @@ The containers are stored in (https://quay.io/repository/nmstate/test-env)
 All files licensed under Apache 2.0.
 
 # Containers for test usage
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnmstate%2Ftest-env.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnmstate%2Ftest-env?ref=badge_shield)
+
 
 ## NetworkManager
 
@@ -107,3 +109,7 @@ sudo ./run.sh ipsec host2site
 ```bash
 sudo ./run.sh ipsec mix46
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnmstate%2Ftest-env.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnmstate%2Ftest-env?ref=badge_large)
